@@ -1,1 +1,1 @@
-# bpmn2faas-generator
+# bpmn2faas-generator-python
