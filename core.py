@@ -1,25 +1,24 @@
 import importlib
 
+
 class Generator:
-    # We are going to receive a plugin as parameter
-    def __init__(self, plugin):
-        # Checking if plugin were sent
-        if plugin != None:
-            # create a list of plugins
+    def __init__(self, provider: str):
+        if provider is not None:
+            plugin = f'bpmn2faas_{provider}_plugin_python'
+
             try:
-                self._plugin = importlib.import_module(plugin, './plugins/' + plugin).Plugin()
-            except AttributeError:
-                raise ImportError('Plugin ' + plugin + ' not found!')
+                self._plugin = importlib.import_module('.main', 'plugins.' + plugin).Plugin()
+            except ModuleNotFoundError:
+                raise ModuleNotFoundError(f'Plugin {plugin} not found!')
         else:
             raise ImportError('No plugin provided')
 
-
-    def run(self):
+    def generate(self, bpmn_path: str, endpoints: object):
         print('Starting Plugin')
         print('-' * 10)
 
         # We is were magic happens, and all the plugins are going to be printed
-        print(self._plugin)
+        print(self._plugin.generate(bpmn_path, endpoints))
 
         print('-' * 10)
         print('Ending Plugin')

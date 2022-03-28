@@ -26,6 +26,7 @@ def save_business_code():
 
     return jsonify(get_function_names(os.path.join(folder, file.filename)))
 
+
 @app.route('/generate', methods=['PUT'])
 def generate():
     cookie = request.cookies.get('session_id')
@@ -37,10 +38,13 @@ def generate():
     folder = os.path.join('temp', cookie)
     with open(os.path.join(folder, 'diagram.bpmn'), "w") as text_file:
         text_file.write(bpmn)
-    with open(os.path.join(folder, 'endpoints.json'), "w") as text_file:
-        text_file.write(endpoints)
+    # with open(os.path.join(folder, 'endpoints.json'), "w") as text_file:
+        # text_file.write(endpoints)
 
-    generator = Generator('test')
+    endpoints = json.loads(endpoints)
+
+    generator = Generator(endpoints['provider'])
+    generator.generate(os.path.join(folder, 'diagram.bpmn'), endpoints)
 
     return 'hello'
 
