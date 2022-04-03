@@ -57,10 +57,11 @@ def __empty_temp_folder():
 def get_function_names(zip_path) -> json:
     zip_filename: str = Path(zip_path).stem
     ZipFile(zip_path, 'r').extractall(os.path.dirname(zip_path))
+    os.rename(zip_path, zip_path+'.input')
 
-    handler_folder: str = os.path.join(os.path.dirname(zip_path), zip_filename, 'handler')
+    folder: str = os.path.join(os.path.dirname(zip_path), zip_filename)
 
-    result = {'project': zip_filename, 'modules': __get_modules(handler_folder)}
+    result = {'project': zip_filename, 'modules': __get_modules(folder)}
 
     #__empty_temp_folder()
     return json.dumps(result)

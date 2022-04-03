@@ -13,13 +13,13 @@ class Generator:
         else:
             raise ImportError('No plugin provided')
 
-    def generate(self, bpmn_path: str, endpoints: object):
+    def generate(self, path: str, endpoints: object) -> str :
         print('Starting Plugin')
         print('-' * 10)
 
-        # We is were magic happens, and all the plugins are going to be printed
-        print(self._plugin.generate(bpmn_path, endpoints))
+        output = self._plugin.generate(path, endpoints['endpoints'])
 
         print('-' * 10)
         print('Ending Plugin')
         print()
+        return output
