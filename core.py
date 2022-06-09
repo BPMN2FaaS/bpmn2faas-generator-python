@@ -13,11 +13,11 @@ class Generator:
         else:
             raise ImportError('No plugin provided')
 
-    def generate(self, path: str, endpoints: object) -> str :
+    def generate(self, path: str, endpoints: dict) -> str :
         print('Starting Plugin')
         print('-' * 10)
 
-        output = self._plugin.generate(path, endpoints['endpoints'])
+        output = self._plugin.generate(path, endpoints)
 
         print('-' * 10)
         print('Ending Plugin')

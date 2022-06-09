@@ -42,14 +42,14 @@ def generate():
     endpoints = json.loads(endpoints)
 
     generator = Generator(endpoints['provider'])
-    deployment_package_path = generator.generate(folder, endpoints)
+    deployment_package_path = generator.generate(folder, endpoints['endpoints'])
 
     with open(deployment_package_path, mode="rb") as binary_file:
         binary_file = binary_file.read()
         binary_file = base64.b64encode(binary_file)
         binary_file = binary_file.decode('utf-8')
 
-    head, filename = os.path.split(deployment_package_path)
+    _, filename = os.path.split(deployment_package_path)
 
     return json.dumps({'filename': filename, 'file': binary_file})
 
