@@ -1,3 +1,5 @@
+[![PyPI pyversions](https://img.shields.io/badge/python-3.7-green.svg)](https://www.python.org/downloads/release/python-370/)
+
 # BPMN2FaaS Generator (Python)
 
 ## How to run
