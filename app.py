@@ -17,7 +17,6 @@ CORS(app, resources={r"*": {"origins": "http://localhost:9013"}}, supports_crede
 @app.route('/upload-files', methods=['PUT'])
 def save_business_code():
     cookie = request.cookies.get('session_id')
-    print(cookie)
 
     file = request.files.get('file')
     folder = os.path.join('temp', cookie)
@@ -30,7 +29,6 @@ def save_business_code():
 @app.route('/generate', methods=['PUT'])
 def generate():
     cookie = request.cookies.get('session_id')
-    print(cookie)
 
     bpmn = request.form.get('bpmn')
     endpoints = request.form.get('endpoints')
